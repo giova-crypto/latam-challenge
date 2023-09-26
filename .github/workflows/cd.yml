@@ -1,7 +1,27 @@
 name: 'Continuous Delivery'
 
 on:
-  ...
+  workflow_run:
+    workflows: ["Continuous Integration"]
+    types:
+      - completed
 
 jobs:
-  ...
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - name: Deploy container to Cloud Run
+        run: |
+            gcloud run deploy latam-challenge-run \
+              --image=${{ secrets.CONTAINER_IMAGE_URL }}:latest \
+              --allow-unauthenticated \
+              --region=${{ secrets.GCLOUD_REGION }} \
+              --project=${{ secrets.GCLOUD_PROJECT_ID }}
