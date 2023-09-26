@@ -46,5 +46,3 @@ jobs:
             docker tag latam-challenge ${{ secrets.CONTAINER_IMAGE_URL }}:latest
             gcloud auth configure-docker ${{ secrets.GCLOUD_REGION }}-docker.pkg.dev
             docker push ${{ secrets.CONTAINER_IMAGE_URL }} --all-tags
-    outputs:
-      ci-status: ${{ job.status }}
