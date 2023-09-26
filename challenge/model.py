@@ -323,7 +323,7 @@ class DelayModel:
             features (pd.DataFrame): preprocessed data.
             target (pd.DataFrame): target.
         """
-        x_train, x_test, y_train, y_test = train_test_split(features, target['delay'], test_size=0.33, random_state=42)
+        x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.33, random_state=42)
 
         n_y0 = len(y_train[y_train == 0])
         n_y1 = len(y_train[y_train == 1])
