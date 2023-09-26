@@ -1,5 +1,6 @@
 venv
 .pytest_cache
-__MACOSX
+__MACOSX/
 reports
 .coverage
+.idea/
