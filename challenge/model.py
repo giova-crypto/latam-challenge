@@ -306,7 +306,7 @@ class DelayModel:
         )
         features = features[self.top_10_features]
         if(target_column):
-            target = data[['delay']].copy()
+            target = data['delay']#].copy()
             return features, target
         else:
             return features
@@ -323,12 +323,12 @@ class DelayModel:
             features (pd.DataFrame): preprocessed data.
             target (pd.DataFrame): target.
         """
-        x_train, x_test, y_train, y_test = train_test_split(features, target['delay'], test_size=0.33, random_state=42)
+        x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.33, random_state=42)
 
         n_y0 = len(y_train[y_train == 0])
         n_y1 = len(y_train[y_train == 1])
 
-        x_train2, x_test2, y_train2, y_test2 = train_test_split(features[self.top_10_features], target['delay'], test_size=0.33,
+        x_train2, x_test2, y_train2, y_test2 = train_test_split(features[self.top_10_features], target, test_size=0.33,
                                                                 random_state=42)
 
         reg_model_2 = LogisticRegression(class_weight={1: n_y0 / len(y_train), 0: n_y1 / len(y_train)})
