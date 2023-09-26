@@ -4,3 +4,4 @@ __MACOSX/
 reports
 .coverage
 .idea/
+challenge/__pycache__/*
