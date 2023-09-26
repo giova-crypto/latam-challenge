@@ -1,6 +1,6 @@
-name: Test, Build, and Push to Google Cloud run
+name: 'Continuous Integration'
 
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
@@ -25,7 +25,7 @@ jobs:
         run: |
           make model-test
           make api-test
-  build_deploy:
+  build:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -46,10 +46,3 @@ jobs:
             docker tag latam-challenge ${{ secrets.CONTAINER_IMAGE_URL }}:latest
             gcloud auth configure-docker ${{ secrets.GCLOUD_REGION }}-docker.pkg.dev
             docker push ${{ secrets.CONTAINER_IMAGE_URL }} --all-tags
-      - name: Deploy container to Cloud Run
-        run: |
-            gcloud run deploy latam-challenge-run \
-              --image=${{ secrets.CONTAINER_IMAGE_URL }}:latest \
-              --allow-unauthenticated \
-              --region=${{ secrets.GCLOUD_REGION }} \
-              --project=${{ secrets.GCLOUD_PROJECT_ID }}
