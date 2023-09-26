@@ -4,7 +4,10 @@ Software Engineer (ML & LLMs) Challenge Solution
 The challenge solution is hosted on a github repo and deployed on a GCP Cloud Run service. The repo is public and can be found [here](https://github.com/giova-crypto/latam-challenge/).
 
 ### Solution explanations
-- The 
+- The model selected was Logistic Regression due to:
+- Better metrics than XGBoost in classification_report
+- Normally demands less computational resources
+- Easier to understand and explain if needed
 
 ## Usage
 To use the solution, you can either:
